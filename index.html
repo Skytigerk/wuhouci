@@ -6,96 +6,59 @@
     <title>河南省文旅地图 · 彩色行政区划</title>
     <style>
         :root {
-            --bg: #f8f9fa;
-            --white: #fff;
-            --primary: #0d6efd;
-            --primary-dark: #0b5ed7;
-            --text: #333;
-            --border: #e0e0e0;
+            --bg: #f8f9fa; --white: #fff; --primary: #0d6efd;
+            --primary-dark: #0b5ed7; --text: #333;
         }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
-            background: var(--bg); color: var(--text); margin: 0; padding-top: 60px;
-        }
-        .navbar {
-            background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            padding: 12px 16px; position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+            background: var(--bg); color: var(--text); margin: 0; padding-top: 60px; }
+        .navbar { background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 12px 16px; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
         .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
         .nav-brand { font-weight: 600; font-size: 1.1rem; color: var(--text); text-decoration: none; }
         .nav-links { display: flex; gap: 16px; }
-        .nav-links a { color: #666; text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
+        .nav-links a { color: #666; text-decoration: none; font-size: 0.95rem; }
         .nav-links a:hover { color: var(--primary); }
-
-        .header {
-            text-align: center; padding: 40px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;
-        }
+        .header { text-align: center; padding: 40px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
         .header h1 { font-size: 2.2rem; margin-bottom: 12px; }
         .header p { font-size: 1rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
-
         .map-section { padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
         .map-title { font-size: 1.5rem; margin-bottom: 24px; text-align: center; }
-        .map-container {
-            background: var(--white); border-radius: 16px;
-            box-shadow: 0 12px 40px rgba(0,0,0,0.08); padding: 30px;
-        }
-        .map-svg-wrapper { position: relative; width: 100%; max-width: 1000px; margin: 0 auto; }
+        .map-container { background: var(--white); border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08); padding: 30px; }
         svg { width: 100%; height: auto; border-radius: 8px; display: block; }
-
-        /* 城市分栏 */
-        .city-block {
-            border: 1px solid #e8e8e8; border-radius: 12px;
-            background: #fafcff; padding: 20px; margin-bottom: 30px;
-        }
-        .city-title {
-            font-size: 1.4rem; font-weight: 600; margin-bottom: 20px; color: var(--primary);
-            border-left: 5px solid var(--primary); padding-left: 12px;
-            display: flex; align-items: center; gap: 8px;
-        }
+        .city-block { border: 1px solid #e8e8e8; border-radius: 12px;
+            background: #fafcff; padding: 20px; margin-bottom: 30px; }
+        .city-title { font-size: 1.4rem; font-weight: 600; margin-bottom: 20px;
+            color: var(--primary); border-left: 5px solid var(--primary); padding-left: 12px;
+            display: flex; align-items: center; gap: 8px; }
         .city-title::before { content: "📍"; font-size: 1.2rem; }
-
-        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .scene-card {
-            background: var(--white); border-radius: 12px; padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06); transition: 0.3s;
-        }
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 20px; }
+        .scene-card { background: var(--white); border-radius: 12px; padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06); transition: 0.3s; }
         .scene-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
         .scene-card h3 { margin-top: 0; margin-bottom: 8px; font-size: 1.1rem; }
         .scene-card p { margin: 0; color: #666; font-size: 0.9rem; line-height: 1.5; }
         .card-actions { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
-        .btn { padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; text-decoration: none; display: inline-block; cursor: pointer; border: none; }
+        .btn { padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; text-decoration: none;
+            display: inline-block; cursor: pointer; border: none; }
         .btn-primary { background: var(--primary); color: white; }
         .btn-primary:hover { background: var(--primary-dark); }
         .btn-disabled { background: #e0e0e0; color: #999; cursor: not-allowed; }
-
-        /* 弹窗 */
-        .popup-overlay {
-            display: none; position: fixed; inset: 0;
-            background: rgba(0,0,0,0.4); z-index: 9998;
-        }
+        .popup-overlay { display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.4); z-index: 9998; }
         .popup-overlay.active { display: block; }
-        .popup-card {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: white; border-radius: 16px; padding: 28px 24px;
-            z-index: 9999; max-width: 320px; width: 90%;
-            box-shadow: 0 24px 64px rgba(0,0,0,0.25);
-        }
+        .popup-card { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);
+            background: white; border-radius: 16px; padding: 28px 24px; z-index: 9999;
+            max-width: 320px; width: 90%; box-shadow: 0 24px 64px rgba(0,0,0,0.25); display: none; }
         .popup-card h3 { margin-top: 0; color: var(--primary); font-size: 1.2rem; margin-bottom: 10px; }
         .popup-card p { color: #555; font-size: 0.95rem; line-height: 1.5; margin-bottom: 16px; }
-        .popup-close {
-            position: absolute; top: 12px; right: 16px;
-            background: none; border: none; font-size: 1.8rem; color: #aaa; cursor: pointer;
-        }
+        .popup-close { position: absolute; top: 12px; right: 16px;
+            background: none; border: none; font-size: 1.8rem; color: #aaa; cursor: pointer; }
         .popup-close:hover { color: #333; }
-
-        .footer {
-            background: #1c2330; color: #a6a8ba;
-            text-align: center; padding: 30px 20px; margin-top: 60px;
-        }
+        .footer { background: #1c2330; color: #a6a8ba; text-align: center; padding: 30px 20px; margin-top: 60px; }
         .footer a { color: #a6a8ba; text-decoration: none; }
         .footer a:hover { color: #fff; }
-
         @media (max-width: 480px) {
             .city-title { font-size: 1.2rem; }
             .city-block { padding: 16px; }
@@ -108,7 +71,7 @@
             <a href="#" class="nav-brand">河南省文旅地图</a>
             <div class="nav-links">
                 <a href="#map">地图模式</a>
-                <a href="https://github.com/Skytigerk/wuhouci">项目代码</a>
+                <a href="https://github.com/Skytigerk/wuhouci" target="_blank">项目代码</a>
             </div>
         </div>
     </nav>
@@ -121,69 +84,56 @@
     <section class="map-section" id="map">
         <h2 class="map-title">河南省行政区划及景点分布</h2>
         <div class="map-container">
-            <div class="map-svg-wrapper">
-                <svg viewBox="0 0 800 560" xmlns="http://www.w3.org/2000/svg">
-                    <!-- 背景 -->
-                    <rect width="800" height="560" fill="#e8f4f8" rx="8"/>
-
-                    <!-- 上行：豫北、郑州、开封 -->
-                    <path d="M20,20 L380,20 L380,160 L20,160 Z" fill="#b3cde3" stroke="white" stroke-width="2"/>
-                    <text x="200" y="98" font-size="16" font-weight="bold" fill="#444" text-anchor="middle">安阳 / 新乡</text>
-
-                    <path d="M380,20 L580,20 L580,160 L380,160 Z" fill="#4caf50" stroke="white" stroke-width="2" style="cursor:pointer" onclick="alert('郑州景点即将开放，敬请期待！')"/>
-                    <text x="480" y="98" font-size="18" font-weight="bold" fill="white" text-anchor="middle">郑州</text>
-
-                    <path d="M580,20 L780,20 L780,160 L580,160 Z" fill="#ab47bc" stroke="white" stroke-width="2" style="cursor:pointer" onclick="alert('开封景点即将开放，敬请期待！')"/>
-                    <text x="680" y="98" font-size="18" font-weight="bold" fill="white" text-anchor="middle">开封</text>
-
-                    <!-- 中行：洛阳、许昌/平顶山、驻马店 -->
-                    <path d="M20,160 L250,160 L250,300 L20,300 Z" fill="#ff7043" stroke="white" stroke-width="2" style="cursor:pointer" onclick="alert('洛阳景点即将开放，敬请期待！')"/>
-                    <text x="135" y="238" font-size="18" font-weight="bold" fill="white" text-anchor="middle">洛阳</text>
-
-                    <path d="M250,160 L540,160 L540,300 L250,300 Z" fill="#26a69a" stroke="white" stroke-width="2"/>
-                    <text x="395" y="238" font-size="16" font-weight="bold" fill="white" text-anchor="middle">许昌 / 平顶山</text>
-
-                    <path d="M540,160 L780,160 L780,300 L540,300 Z" fill="#5c8a8a" stroke="white" stroke-width="2"/>
-                    <text x="660" y="238" font-size="16" font-weight="bold" fill="white" text-anchor="middle">驻马店 / 周口</text>
-
-                    <!-- 下行：南阳（大块）、信阳 -->
-                    <path d="M20,300 L540,300 L540,540 L20,540 Z" fill="#ffcc00" stroke="white" stroke-width="3" style="cursor:pointer" onclick="showScenePopup('wuhouci')"/>
-                    <text x="140" y="530" font-size="20" font-weight="bold" fill="#555" text-anchor="middle">南阳</text>
-
-                    <path d="M540,300 L780,300 L780,540 L540,540 Z" fill="#78909c" stroke="white" stroke-width="2"/>
-                    <text x="660" y="428" font-size="16" font-weight="bold" fill="white" text-anchor="middle">信阳</text>
-
-                    <!-- 南阳内景点图标（四角分布） -->
-                    <!-- 祠：武侯祠，左上 -->
-                    <circle cx="100" cy="360" r="22" fill="#ff7043" stroke="white" stroke-width="2.5" style="cursor:pointer" onclick="showScenePopup('wuhouci')"/>
-                    <text x="100" y="365" font-size="11" font-weight="bold" fill="white" text-anchor="middle" style="pointer-events:none">祠</text>
-
-                    <!-- 医：医圣祠，右上 -->
-                    <circle cx="440" cy="360" r="22" fill="#36d1dc" stroke="white" stroke-width="2.5" style="cursor:pointer" onclick="showScenePopup('yisheng')"/>
-                    <text x="440" y="365" font-size="11" font-weight="bold" fill="white" text-anchor="middle" style="pointer-events:none">医</text>
-
-                    <!-- 衙：府衙，左下 -->
-                    <circle cx="100" cy="480" r="22" fill="#8bc34a" stroke="white" stroke-width="2.5" style="cursor:pointer" onclick="showScenePopup('fuyamen')"/>
-                    <text x="100" y="485" font-size="11" font-weight="bold" fill="white" text-anchor="middle" style="pointer-events:none">衙</text>
-
-                    <!-- 博：博物馆，右下 -->
-                    <circle cx="440" cy="480" r="22" fill="#9c27b0" stroke="white" stroke-width="2.5" style="cursor:pointer" onclick="showScenePopup('museum')"/>
-                    <text x="440" y="485" font-size="11" font-weight="bold" fill="white" text-anchor="middle" style="pointer-events:none">博</text>
-                </svg>
-            </div>
-
-            <p style="text-align:center; color:#888; margin-top:12px; font-size:0.9rem;">点击南阳区块内的图标可查看景点详情</p>
+            <svg viewBox="0 0 800 560" xmlns="http://www.w3.org/2000/svg">
+                <rect width="800" height="560" fill="#e8f4f8" rx="8"/>
+                <!-- 豫北 -->
+                <path d="M20,20 L380,20 L380,160 L20,160 Z" fill="#b3cde3" stroke="white" stroke-width="2"/>
+                <text x="200" y="98" font-size="16" font-weight="bold" fill="#444" text-anchor="middle">安阳 / 新乡</text>
+                <!-- 郑州 -->
+                <path d="M380,20 L580,20 L580,160 L380,160 Z" fill="#4caf50" stroke="white" stroke-width="2" style="cursor:pointer" onclick="openPopup('zhengzhou')"/>
+                <text x="480" y="98" font-size="18" font-weight="bold" fill="white" text-anchor="middle" style="pointer-events:none">郑州</text>
+                <!-- 开封 -->
+                <path d="M580,20 L780,20 L780,160 L580,160 Z" fill="#ab47bc" stroke="white" stroke-width="2" style="cursor:pointer" onclick="openPopup('kaifeng')"/>
+                <text x="680" y="98" font-size="18" font-weight="bold" fill="white" text-anchor="middle" style="pointer-events:none">开封</text>
+                <!-- 洛阳 -->
+                <path d="M20,160 L250,160 L250,300 L20,300 Z" fill="#ff7043" stroke="white" stroke-width="2" style="cursor:pointer" onclick="openPopup('luoyang')"/>
+                <text x="135" y="238" font-size="18" font-weight="bold" fill="white" text-anchor="middle" style="pointer-events:none">洛阳</text>
+                <!-- 许昌 -->
+                <path d="M250,160 L540,160 L540,300 L250,300 Z" fill="#26a69a" stroke="white" stroke-width="2"/>
+                <text x="395" y="238" font-size="16" font-weight="bold" fill="white" text-anchor="middle">许昌 / 平顶山</text>
+                <!-- 驻马店 -->
+                <path d="M540,160 L780,160 L780,300 L540,300 Z" fill="#5c8a8a" stroke="white" stroke-width="2"/>
+                <text x="660" y="238" font-size="16" font-weight="bold" fill="white" text-anchor="middle">驻马店 / 周口</text>
+                <!-- 南阳（大块）-->
+                <path d="M20,300 L540,300 L540,540 L20,540 Z" fill="#ffcc00" stroke="white" stroke-width="3"/>
+                <text x="140" y="530" font-size="20" font-weight="bold" fill="#555" text-anchor="middle">南阳</text>
+                <!-- 信阳 -->
+                <path d="M540,300 L780,300 L780,540 L540,540 Z" fill="#78909c" stroke="white" stroke-width="2"/>
+                <text x="660" y="428" font-size="16" font-weight="bold" fill="white" text-anchor="middle">信阳</text>
+                <!-- 祠 武侯祠 左上 -->
+                <circle cx="100" cy="360" r="22" fill="#ff7043" stroke="white" stroke-width="2.5" style="cursor:pointer" onclick="openPopup('wuhouci')"/>
+                <text x="100" y="365" font-size="11" font-weight="bold" fill="white" text-anchor="middle" style="pointer-events:none">祠</text>
+                <!-- 医 医圣祠 右上 -->
+                <circle cx="440" cy="360" r="22" fill="#36d1dc" stroke="white" stroke-width="2.5" style="cursor:pointer" onclick="openPopup('yisheng')"/>
+                <text x="440" y="365" font-size="11" font-weight="bold" fill="white" text-anchor="middle" style="pointer-events:none">医</text>
+                <!-- 衙 府衙 左下 -->
+                <circle cx="100" cy="480" r="22" fill="#8bc34a" stroke="white" stroke-width="2.5" style="cursor:pointer" onclick="openPopup('fuyamen')"/>
+                <text x="100" y="485" font-size="11" font-weight="bold" fill="white" text-anchor="middle" style="pointer-events:none">衙</text>
+                <!-- 博 博物馆 右下 -->
+                <circle cx="440" cy="480" r="22" fill="#9c27b0" stroke="white" stroke-width="2.5" style="cursor:pointer" onclick="openPopup('museum')"/>
+                <text x="440" y="485" font-size="11" font-weight="bold" fill="white" text-anchor="middle" style="pointer-events:none">博</text>
+            </svg>
+            <p style="text-align:center;color:#888;margin-top:12px;font-size:0.9rem;">点击南阳区块内的图标可查看景点详情</p>
         </div>
 
         <!-- 城市分栏卡片 -->
         <div style="margin-top:40px;">
-            <!-- 南阳 -->
             <div class="city-block">
                 <h3 class="city-title">南阳景点</h3>
                 <div class="cards-grid">
                     <div class="scene-card">
                         <h3>卧龙岗武侯祠</h3>
-                        <p>三国诸葛亮"躬耕南阳"故址，刘备"三顾茅庐"处，国家AAAA级旅游景区，全国重点文物保护单位。</p>
+                        <p>三国诸葛亮躬耕南阳故址，刘备三顾茅庐处，国家AAAA级旅游景区，全国重点文物保护单位。</p>
                         <div class="card-actions">
                             <a class="btn btn-primary" href="https://ae.1in.top/wolong/v4/" target="_blank">导览地图</a>
                             <a class="btn btn-primary" href="https://ae.1in.top/wolong/v4/#vr" target="_blank">VR体验</a>
@@ -191,7 +141,7 @@
                     </div>
                     <div class="scene-card">
                         <h3>医圣祠（张仲景纪念地）</h3>
-                        <p>张仲景是东汉医学家，被誉为"医圣"，著有《伤寒杂病论》，祠内有张仲景墓、祠殿等建筑。</p>
+                        <p>张仲景是东汉医学家，被誉为医圣，著有《伤寒杂病论》，祠内有张仲景墓、祠殿等建筑。</p>
                         <div class="card-actions">
                             <button class="btn btn-disabled">导览地图（开发中）</button>
                             <button class="btn btn-disabled">VR（开发中）</button>
@@ -199,8 +149,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- 郑州 -->
             <div class="city-block">
                 <h3 class="city-title">郑州景点</h3>
                 <div class="cards-grid">
@@ -222,8 +170,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- 洛阳 -->
             <div class="city-block">
                 <h3 class="city-title">洛阳景点</h3>
                 <div class="cards-grid">
@@ -248,59 +194,76 @@
         </div>
     </section>
 
-    <!-- 弹窗遮罩 -->
+    <!-- 弹窗 -->
     <div class="popup-overlay" id="popupOverlay" onclick="closePopup()"></div>
-    <div class="popup-card" id="popupCard" style="display:none;">
-        <button class="popup-close" onclick="closePopup()">×</button>
+    <div class="popup-card" id="popupCard">
+        <button class="popup-close" onclick="closePopup()">x</button>
         <h3 id="popupTitle"></h3>
         <p id="popupDesc"></p>
         <div class="card-actions" id="popupActions"></div>
     </div>
 
     <footer class="footer">
-        <div>© 2025 河南省文旅地图 | 数据来源：河南省旅游资源普查</div>
+        <div>2025 河南省文旅地图</div>
         <div style="margin-top:8px;font-size:0.9rem;">
-            <a href="https://ae.1in.top/wolong/v4/">武侯祠完整导览</a> |
-            <a href="https://github.com/Skytigerk/wuhouci">项目开源</a>
+            <a href="https://ae.1in.top/wolong/v4/" target="_blank">武侯祠完整导览</a> |
+            <a href="https://github.com/Skytigerk/wuhouci" target="_blank">项目开源</a>
         </div>
     </footer>
 
     <script>
-        const SCENES = {
+        var SCENES = {
             wuhouci: {
-                title: "卧龙岗武侯祠",
-                desc: "三国诸葛亮"躬耕南阳"故址，刘备"三顾茅庐"处，国家AAAA级旅游景区，全国重点文物保护单位。",
-                nav: "https://ae.1in.top/wolong/v4/",
-                vr: "https://ae.1in.top/wolong/v4/#vr"
+                title: '卧龙岗武侯祠',
+                desc: '三国诸葛亮躬耕南阳故址，刘备三顾茅庐处，国家AAAA级旅游景区，全国重点文物保护单位。',
+                nav: 'https://ae.1in.top/wolong/v4/',
+                vr: 'https://ae.1in.top/wolong/v4/#vr'
             },
             yisheng: {
-                title: "医圣祠（张仲景纪念地）",
-                desc: "张仲景是东汉医学家，被誉为"医圣"，著有《伤寒杂病论》，祠内有张仲景墓、祠殿等建筑。",
+                title: '医圣祠（张仲景纪念地）',
+                desc: '张仲景是东汉医学家，被誉为医圣，著有《伤寒杂病论》，祠内有张仲景墓、祠殿等建筑。',
                 nav: null, vr: null
             },
             fuyamen: {
-                title: "南阳府衙",
-                desc: "始建于元朝，为南阳历代府治所在地，建筑布局完整，是研究古代官署制度的重要实物遗存。",
+                title: '南阳府衙',
+                desc: '始建于元朝，为南阳历代府治所在地，建筑布局完整，是研究古代官署制度的重要实物遗存。',
                 nav: null, vr: null
             },
             museum: {
-                title: "南阳博物馆",
-                desc: "馆藏文物丰富，包括青铜器、玉器、瓷器、书画等，展示南阳历史文化的演变历程。",
+                title: '南阳博物馆',
+                desc: '馆藏文物丰富，包括青铜器、玉器、瓷器、书画等，展示南阳历史文化的演变历程。',
+                nav: null, vr: null
+            },
+            zhengzhou: {
+                title: '郑州景点',
+                desc: '少林寺、黄河风景区等景点导览地图即将上线，敬请期待！',
+                nav: null, vr: null
+            },
+            luoyang: {
+                title: '洛阳景点',
+                desc: '龙门石窟、白马寺等景点导览地图即将上线，敬请期待！',
+                nav: null, vr: null
+            },
+            kaifeng: {
+                title: '开封景点',
+                desc: '清明上河园、铁塔公园等景点导览地图即将上线，敬请期待！',
                 nav: null, vr: null
             }
         };
 
-        function showScenePopup(id) {
-            const s = SCENES[id];
+        function openPopup(id) {
+            var s = SCENES[id];
             if (!s) return;
             document.getElementById('popupTitle').textContent = s.title;
             document.getElementById('popupDesc').textContent = s.desc;
-            const actions = document.getElementById('popupActions');
-            actions.innerHTML = s.nav
-                ? `<a class="btn btn-primary" href="${s.nav}" target="_blank">导览地图</a>
-                   <a class="btn btn-primary" href="${s.vr}" target="_blank">VR体验</a>`
-                : `<button class="btn btn-disabled">导览地图（开发中）</button>
-                   <button class="btn btn-disabled">VR（开发中）</button>`;
+            var actions = document.getElementById('popupActions');
+            if (s.nav) {
+                actions.innerHTML = '<a class="btn btn-primary" href="' + s.nav + '" target="_blank">导览地图</a>' +
+                    '<a class="btn btn-primary" href="' + s.vr + '" target="_blank">VR体验</a>';
+            } else {
+                actions.innerHTML = '<button class="btn btn-disabled">导览地图（开发中）</button>' +
+                    '<button class="btn btn-disabled">VR（开发中）</button>';
+            }
             document.getElementById('popupCard').style.display = 'block';
             document.getElementById('popupOverlay').classList.add('active');
         }
@@ -309,15 +272,6 @@
             document.getElementById('popupCard').style.display = 'none';
             document.getElementById('popupOverlay').classList.remove('active');
         }
-
-        // 导航栏滚动隐藏
-        let lastY = 0;
-        const navbar = document.querySelector('.navbar');
-        window.addEventListener('scroll', () => {
-            const cur = window.scrollY;
-            navbar.style.transform = cur > lastY + 4 && cur > 60 ? 'translateY(-100%)' : 'translateY(0)';
-            lastY = cur;
-        }, { passive: true });
     </script>
 </body>
 </html>
