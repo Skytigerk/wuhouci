@@ -152,60 +152,63 @@
         <h2 class="map-title">河南省行政区划及景点分布</h2>
         <div class="map-container">
             <div class="map-svg-wrapper">
-                <!-- 河南省行政区划SVG（简化版） -->
-                <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                    <g id="henan">
-                        <!-- 南阳区域（中心放大） -->
-                        <path id="nanyang" d="M190,140 L220,130 L255,140 L245,195 L205,190 L190,165z" data-name="南阳" />
-                        <!-- 郑州区域 -->
-                        <path id="zhengzhou" d="M150,85 L165,75 L185,90 L170,105 L155,90z" data-name="郑州"/>
-                        <!-- 洛阳区域 -->
-                        <path id="luoyang" d="M130,75 L145,65 L160,80 L145,95 L130,85z" data-name="洛阳"/>
-                        <!-- 开封区域 -->
-                        <path id="kaifeng" d="M170,75 L190,70 L200,85 L185,95 L170,85z" data-name="开封"/>
-                    </g>
+                <!-- 河南省行政区划SVG（重构版，铺满画布） -->
+                <svg viewBox="0 0 800 560" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+                    <!-- 背景 -->
+                    <rect width="800" height="560" fill="#e8f4f8" rx="8"/>
 
-                    <!-- 城市标记点 -->
-                    <circle cx="165" cy="90" r="8" fill="#ff4444" stroke="white" stroke-width="2"/>
-                    <circle cx="140" cy="80" r="8" fill="#ff4444" stroke="white" stroke-width="2"/>
-                    <circle cx="225" cy="155" r="10" fill="#ffcc00" stroke="#333" stroke-width="2"/>
-                    <circle cx="185" cy="80" r="8" fill="#ff4444" stroke="white" stroke-width="2"/>
+                    <!-- 豫北区域（安阳/鹤壁/新乡） -->
+                    <path id="yuBei" d="M100,20 L400,20 L400,130 L100,130 Z" fill="#b3cde3" stroke="white" stroke-width="2" data-name="豫北"/>
+                    <text x="250" y="82" font-size="16" font-weight="bold" fill="#444" text-anchor="middle">安阳/新乡</text>
 
-                    <!-- 城市名称标签 -->
-                    <text x="340" y="180" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">郑州</text>
-                    <text x="300" y="160" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">洛阳</text>
-                    <text x="460" y="330" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">南阳</text>
-                    <text x="380" y="160" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">开封</text>
+                    <!-- 郑州 -->
+                    <path id="zhengzhou" d="M400,20 L580,20 L580,130 L400,130 Z" fill="#4caf50" stroke="white" stroke-width="2" data-name="郑州" style="cursor:pointer"/>
+                    <text x="490" y="82" font-size="18" font-weight="bold" fill="white" text-anchor="middle">郑州</text>
+
+                    <!-- 开封 -->
+                    <path id="kaifeng" d="M580,20 L800,20 L800,130 L580,130 Z" fill="#ab47bc" stroke="white" stroke-width="2" data-name="开封" style="cursor:pointer"/>
+                    <text x="690" y="82" font-size="18" font-weight="bold" fill="white" text-anchor="middle">开封</text>
+
+                    <!-- 洛阳 -->
+                    <path id="luoyang" d="M20,130 L280,130 L280,290 L20,290 Z" fill="#ff7043" stroke="white" stroke-width="2" data-name="洛阳" style="cursor:pointer"/>
+                    <text x="150" y="215" font-size="18" font-weight="bold" fill="white" text-anchor="middle">洛阳</text>
+
+                    <!-- 许昌/平顶山 -->
+                    <path id="xuChang" d="M280,130 L550,130 L550,290 L280,290 Z" fill="#26a69a" stroke="white" stroke-width="2" data-name="许昌/平顶山"/>
+                    <text x="415" y="215" font-size="16" font-weight="bold" fill="white" text-anchor="middle">许昌/平顶山</text>
+
+                    <!-- 驻马店/周口 -->
+                    <path id="zhuMaDian" d="M550,130 L800,130 L800,290 L550,290 Z" fill="#5c8a8a" stroke="white" stroke-width="2" data-name="驻马店"/>
+                    <text x="675" y="215" font-size="16" font-weight="bold" fill="white" text-anchor="middle">驻马店/周口</text>
+
+                    <!-- 南阳（核心，高亮放大） -->
+                    <path id="nanyang" d="M20,290 L550,290 L550,520 L20,520 Z" fill="#ffcc00" stroke="white" stroke-width="3" data-name="南阳" style="cursor:pointer"/>
+                    <text x="180" y="540" font-size="20" font-weight="bold" fill="#333" text-anchor="middle">南阳</text>
+
+                    <!-- 信阳 -->
+                    <path id="xinyang" d="M550,290 L800,290 L800,560 L550,560 Z" fill="#78909c" stroke="white" stroke-width="2" data-name="信阳"/>
+                    <text x="675" y="430" font-size="16" font-weight="bold" fill="white" text-anchor="middle">信阳</text>
+
+                    <!-- 南阳景点图标（SVG内直接定位） -->
+                    <!-- 祠：武侯祠，左上 -->
+                    <circle cx="100" cy="350" r="18" fill="#ff7043" stroke="white" stroke-width="2" style="cursor:pointer" onclick="showTooltip('wuhouci')"/>
+                    <text x="100" y="355" font-size="11" font-weight="bold" fill="white" text-anchor="middle" style="pointer-events:none">祠</text>
+
+                    <!-- 医：医圣祠，右上 -->
+                    <circle cx="460" cy="350" r="18" fill="#36d1dc" stroke="white" stroke-width="2" style="cursor:pointer" onclick="showTooltip('yisheng')"/>
+                    <text x="460" y="355" font-size="11" font-weight="bold" fill="white" text-anchor="middle" style="pointer-events:none">医</text>
+
+                    <!-- 衙：府衙，左下 -->
+                    <circle cx="100" cy="470" r="18" fill="#8bc34a" stroke="white" stroke-width="2" style="cursor:pointer" onclick="showTooltip('fuyamen')"/>
+                    <text x="100" y="475" font-size="11" font-weight="bold" fill="white" text-anchor="middle" style="pointer-events:none">衙</text>
+
+                    <!-- 博：博物馆，右下 -->
+                    <circle cx="460" cy="470" r="18" fill="#9c27b0" stroke="white" stroke-width="2" style="cursor:pointer" onclick="showTooltip('museum')"/>
+                    <text x="460" y="475" font-size="11" font-weight="bold" fill="white" text-anchor="middle" style="pointer-events:none">博</text>
                 </svg>
 
-<style>
-.city-block {
-    border: 1px solid #e8e8e8;
-    border-radius: 12px;
-    background: #fafcff;
-    padding: 20px;
-    margin-bottom: 30px;
-}
-.city-title {
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #0d6efd;
-    border-left: 5px solid #0d6efd;
-    padding-left: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-.city-title::before { content: "📍"; font-size: 1.2rem; }
-@media (max-width: 480px) {
-    .spot-icon { width: 20px; height: 20px; line-height: 20px; font-size: 10px; }
-    .city-title { font-size: 1.2rem; margin-bottom: 16px; }
-    .city-block { padding: 16px; }
-}
-</style>
-
-                <!-- 南阳景点图标 -->
+                <!-- 弹窗（绝对定位覆盖在 SVG 上，用 JS 控制显示） -->
+<!-- 南阳景点图标 -->
                 <div class="spot-icon" id="icon-wuhouci" title="卧龙岗武侯祠">祠</div>
                 <div class="spot-icon" id="icon-yisheng" title="医圣祠">医</div>
                 <div class="spot-icon" id="icon-fuyamen" title="南阳府衙">衙</div>
