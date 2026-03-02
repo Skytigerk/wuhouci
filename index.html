@@ -78,24 +78,12 @@
         #nanyang:hover { fill: #ffb300; }
 
         /* 景点图标 */
-        .spot-icon {
-            position: absolute; width: 28px; height: 28px; border-radius: 50%;
-            color: white; text-align: center; line-height: 28px;
-            font-size: 9px; font-weight: bold;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-            z-index: 5; cursor: pointer; transform: translate(-50%, -50%);
-            border: 2px solid white;
-        }
         .spot-icon:hover { transform: translate(-50%, -50%) scale(1.2); z-index: 6; }
-#icon-wuhouci { top: 35%; left: 35%; background: #ff7043; }
-#icon-yisheng { top: 35%; left: 65%; background: #36d1dc; }
 #icon-fuyamen { top: 65%; left: 35%; background: #8bc34a; }
 #icon-museum { top: 65%; left: 65%; background: #9c27b0; }
 
         /* 手机适配 */
         @media (max-width: 768px) {
-            .spot-icon { width: 24px; height: 24px; line-height: 24px; font-size: 9px; }
-        }
 
         /* 景点卡片区域 */
         .city-cards {
