@@ -205,7 +205,7 @@
 
 <p style="text-align:center;color:#777;margin-top:10px;font-size:0.9em;">（点击上方地图中的图标可查看景点详情）</p>
             <!-- 南阳景点卡片 -->
-            <div class="city-cards">
+            <div class="city-cards" style="display:none;">
 <div class="city-block">
                 <h3 class="city-title"><h3 class="city-title">南阳景点</h3>
                 <div class="cards-grid">
@@ -229,7 +229,7 @@
             </div>
 
             <!-- 郑州景点卡片 -->
-            <div class="city-cards">
+            <div class="city-cards" style="display:none;">
 <div class="city-block">
                 <h3 class="city-title"><h3 class="city-title">郑州景点</h3>
                 <div class="cards-grid">
@@ -301,4 +301,66 @@ function showMuseumCard() {
 }
 <script src="data:text/javascript;base64,PHNjcmlwdD4KZnVuY3Rpb24gc2hvd1NjZW5lQ2FyZChzY2VuZUlkLCB0aXRsZSwgZGVzYywgbmF2VXJsPW51bGwsIHZyVXJsPW51bGwpIHsKICAgIGxldCBjYXJkID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgiZGl2Iik7CiAgICBjYXJkLmNsYXNzTmFtZSA9ICJzY2VuZS1wb3B1cCI7CiAgICBjYXJkLmlubmVySFRNTCA9IGAKICAgICAgICA8aDM+JHt0aXRsZX08L2gzPgogICAgICAgIDxwPiR7ZGVzY308L3A+CiAgICAgICAgPGRpdiBjbGFzcz0iY2FyZC1hY3Rpb25zIj4KICAgICAgICAgICAgJHtuYXZVcmwgPyBgPGEgY2xhc3M9ImJ0biBidG4tcHJpbWFyeSIgaHJlZj0iJHtuYXZVcmx9IiB0YXJnZXQ9Il9ibGFuayI+5a+86KeI5Zyw5Zu+PC9hPmAgOiBgPGJ1dHRvbiBjbGFzcz0iYnRuIGJ0bi1kaXNhYmxlZCI+5a+86KeI5Zyw5Zu+77yI5byA5Y+R5Lit77yJPC9idXR0b24+YH0KICAgICAgICAgICAgJHt2clVybCA/IGA8YSBjbGFzcz0iYnRuIGJ0bi1wcmltYXJ5IiBocmVmPSIke3ZyVXJsfSIgdGFyZ2V0PSJfYmxhbmsiPlZS5L2T6aqMPC9hPmAgOiBgPGJ1dHRvbiBjbGFzcz0iYnRuIGJ0bi1kaXNhYmxlZCI+VlLvvIjlvIDlj5HkuK3vvIk8L2J1dHRvbj5gfQogICAgICAgIDwvZGl2PgogICAgICAgIDxidXR0b24gY2xhc3M9ImNsb3NlLWJ0biIgb25jbGljaz0idGhpcy5wYXJlbnRFbGVtZW50LnJlbW92ZSgpIj7DlzwvYnV0dG9uPgogICAgYDsKICAgIGNhcmQuc3R5bGUuY3NzVGV4dCA9IGAKICAgICAgICBwb3NpdGlvbjpmaXhlZDsgdG9wOjUwJTsgbGVmdDo1MCU7IHRyYW5zZm9ybTp0cmFuc2xhdGUoLTUwJSwtNTAlKTsKICAgICAgICBiYWNrZ3JvdW5kOndoaXRlOyBib3JkZXItcmFkaXVzOjE2cHg7IHBhZGRpbmc6MjBweDsgei1pbmRleDo5OTk5OwogICAgICAgIGJveC1zaGFkb3c6MCAyNHB4IDQ4cHggcmdiYSgwLDAsMCwwLjIpOyBtYXgtd2lkdGg6MzIwcHg7CiAgICAgICAgYm9yZGVyOjFweCBzb2xpZCAjZGRkOwogICAgYDsKICAgIGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoY2FyZCk7CiAgICBjYXJkLnF1ZXJ5U2VsZWN0b3IoIi5jbG9zZS1idG4iKS5hZGRFdmVudExpc3RlbmVyKCJjbGljayIsICgpID0+IGNhcmQucmVtb3ZlKCkpOwogICAgLy8g54K55Ye75aSW6YOo5YWz6ZetCiAgICBzZXRUaW1lb3V0KCgpID0+IHsKICAgICAgICBjb25zdCBjbG9zZUhhbmRsZXIgPSBldiA9PiB7CiAgICAgICAgICAgIGlmICghY2FyZC5jb250YWlucyhldi50YXJnZXQpKSB7CiAgICAgICAgICAgICAgICBjYXJkLnJlbW92ZSgpOwogICAgICAgICAgICAgICAgZG9jdW1lbnQucmVtb3ZlRXZlbnRMaXN0ZW5lcigiY2xpY2siLCBjbG9zZUhhbmRsZXIpOwogICAgICAgICAgICB9CiAgICAgICAgfTsKICAgICAgICBkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCJjbGljayIsIGNsb3NlSGFuZGxlcik7CiAgICB9LCAxMCk7Cn0KPC9zY3JpcHQ+Cg=="></script>
 </body>
-</html>
+</html><style>
+.scene-popup {
+    position: fixed !important; top: 50% !important; left: 50% !important; 
+    transform: translate(-50%,-50%) !important; background: white !important;
+    border-radius: 16px !important; padding: 24px !important; z-index: 9999 !important;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.25) !important; max-width: 320px !important;
+    border: 1px solid #ddd !important; font-family: sans-serif !important;
+}
+.scene-popup h3 { margin-top:0; margin-bottom:10px; font-size:1.2rem; color:#0d6efd; }
+.scene-popup p { margin:0 0 16px; color:#555; font-size:0.95rem; line-height:1.5; }
+.scene-popup .btn { display:inline-block; padding:6px 12px; margin-right:8px; border-radius:6px;
+    font-size:0.85rem; text-decoration:none; border:none; cursor:pointer; }
+.scene-popup .btn-primary { background:#0d6efd; color:white; }
+.scene-popup .btn-disabled { background:#ccc; color:#888; cursor:not-allowed; }
+.scene-popup .close-btn { position:absolute; top:12px; right:12px; border:none; background:none;
+    font-size:1.5rem; color:#888; cursor:pointer; }
+</style>
+<script>
+function showWuHouCard() {
+    const html = `<div class="scene-popup">
+    <h3>卧龙岗武侯祠</h3>
+    <p>三国诸葛亮“躬耕南阳”故址，刘备“三顾茅庐”处，国家AAAA级旅游景区，全国重点文物保护单位。</p>
+    <div><a class="btn btn-primary" href="https://ae.1in.top/wolong/v4/" target="_blank">导览地图</a>
+    <a class="btn btn-primary" href="https://ae.1in.top/wolong/v4/#vr" target="_blank">VR体验</a></div>
+    <button class="close-btn" onclick="this.parentElement.remove()">×</button></div>`;
+    document.body.insertAdjacentHTML('beforeend', html);
+}
+function showYiShengCard() {
+    const html = `<div class="scene-popup"><h3>医圣祠（张仲景纪念地）</h3>
+    <p>张仲景是东汉医学家，被誉为“医圣”，著有《伤寒杂病论》，祠内有张仲景墓、祠殿等建筑。</p>
+    <div><button class="btn btn-disabled">导览地图（开发中）</button>
+    <button class="btn btn-disabled">VR（开发中）</button></div>
+    <button class="close-btn" onclick="this.parentElement.remove()">×</button></div>`;
+    document.body.insertAdjacentHTML('beforeend', html);
+}
+function showFuYaCard() {
+    const html = `<div class="scene-popup"><h3>南阳府衙</h3>
+    <p>始建于元朝，为南阳历代府治所在地，建筑布局完整，是研究古代官署制度的重要实物遗存。</p>
+    <div><button class="btn btn-disabled">导览地图（开发中）</button>
+    <button class="btn btn-disabled">VR（开发中）</button></div>
+    <button class="close-btn" onclick="this.parentElement.remove()">×</button></div>`;
+    document.body.insertAdjacentHTML('beforeend', html);
+}
+function showMuseumCard() {
+    const html = `<div class="scene-popup"><h3>南阳博物馆</h3>
+    <p>馆藏文物丰富，包括青铜器、玉器、瓷器、书画等，展示南阳历史文化的演变历程。</p>
+    <div><button class="btn btn-disabled">导览地图（开发中）</button>
+    <button class="btn btn-disabled">VR（开发中）</button></div>
+    <button class="close-btn" onclick="this.parentElement.remove()">×</button></div>`;
+    document.body.insertAdjacentHTML('beforeend', html);
+}
+// 绑定右键提示
+document.addEventListener('DOMContentLoaded', () => {
+    const circles = document.querySelectorAll('circle[onclick]');
+    circles.forEach(c => {
+        const name = c.getAttribute('onclick');
+        if (name && name.includes('showWuHouCard')) c.setAttribute('title', '点击查看武侯祠详情');
+        else if (name && name.includes('showYiShengCard')) c.setAttribute('title', '点击查看医圣祠详情');
+        else if (name && name.includes('showFuYaCard')) c.setAttribute('title', '点击查看府衙详情');
+        else if (name && name.includes('showMuseumCard')) c.setAttribute('title', '点击查看博物馆详情');
+    });
+});
+</script>
