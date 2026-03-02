@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>南阳文旅导览地图 · 主要景点概览</title>
+    <meta name="description" content="南阳市主要文化旅游景区地图，包括卧龙岗武侯祠、医圣祠、南阳府衙、南阳博物馆、汉画馆、张衡博物馆等景点导览。">
+    <meta name="keywords" content="南阳旅游地图，武侯祠，医圣祠，南阳府衙，博物馆，汉画馆，张衡">
+    <style>
+        :root {
+            --bg: #fafafa;
+            --white: #fff;
+            --primary: #0d6efd;
+            --primary-dark: #0b5ed7;
+            --text: #333;
+            --text-light: #666;
+            --border: #e0e0e0;
+            --shadow: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-hover: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; overflow-x: hidden; background: var(--bg); }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            padding-top: 58px;
+        }
+        .navbar {
+            background: var(--white);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 12px 16px;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+        .navbar.nav-hidden { transform: translateY(-100%); }
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .nav-brand {
+            font-weight: 600; font-size: 1.1rem;
+            color: var(--text);
+            text-decoration: none;
+        }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        .page-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        .page-header h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 12px; }
+        .page-header p { font-size: 1rem; color: var(--text-light); max-width: 700px; margin: 0 auto; }
+
+        .map-container {
+            max-width: 1000px; margin: 40px auto 60px;
+            padding: 0 20px;
+        }
+        .map-title {
+            font-size: 1.3rem; font-weight: 600; margin-bottom: 24px;
+            display: flex; align-items: center; justify-content: center;
+            gap: 10px;
+        }
+        .map-title::before, .map-title::after {
+            content: ''; flex-grow: 1; height: 1px; background: var(--border);
+        }
+        .map-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .scene-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .scene-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+        .scene-card a { text-decoration: none; color: inherit; display: block; }
+        .scene-thumb {
+            height: 180px; overflow: hidden; position: relative;
+            background: linear-gradient(to right bottom, #a3bded, #6991c7);
+        }
+        .scene-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .scene-badge {
+            position: absolute; top: 12px; right: 12px;
+            background: var(--white); color: var(--text);
+            font-size: 0.7rem; font-weight: 500;
+            padding: 2px 8px; border-radius: 4px;
+        }
+        .scene-content { padding: 20px; }
+        .scene-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 6px; }
+        .scene-subtitle { font-size: 0.85rem; color: #888; margin-bottom: 8px; }
+        .scene-desc { font-size: 0.9rem; color: var(--text-light); line-height: 1.5; }
+        .scene-actions { margin-top: 14px; display: flex; gap: 8px; }
+        .action-btn {
+            flex: 1; display: block; text-align: center;
+            background: var(--white); color: var(--text);
+            border: 1px solid var(--border);
+            padding: 6px 10px; border-radius: 6px;
+            font-size: 0.8rem; font-weight: 500; text-decoration: none;
+            transition: 0.2s;
+        }
+        .action-btn.primary { background: var(--primary); color: #fff; border: none; }
+        .action-btn.primary:hover { background: var(--primary-dark); }
+        .action-btn:not(.primary):hover { background: #f0f0f0; }
+        .coming-soon { color: #999; text-align: center; font-style: italic; }
+        .scene-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; }
+        .tag { background: #f0f0f0; color: #666; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; }
+
+        .info-box {
+            max-width: 800px; margin: 40px auto; padding: 0 20px;
+        }
+        .info-card {
+            background: var(--white); border-radius: 12px; padding: 24px;
+            box-shadow: var(--shadow);
+        }
+        .info-card h3 { font-size: 1.2rem; margin-bottom: 12px; }
+        .info-card p { font-size: 0.95rem; color: var(--text-light); line-height: 1.6; }
+
+        @media (max-width: 768px) {
+            .map-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+            .nav-links { gap: 12px; }
+        }
+        @media (max-width: 480px) {
+            .map-grid { grid-template-columns: 1fr; }
+        }
+
+        .footer {
+            background: #1c2330;
+            color: #a6a8ba;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+        .footer a { color: #a6a8ba; text-decoration: none; }
+        .footer a:hover { color: #fff; }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-brand">南阳文旅导览地图</a>
+            <div class="nav-links">
+                <a href="#scenes">景点总览</a>
+                <a href="#about">城市简介</a>
+                <a href="https://ae.1in.top/wolong/v4/" target="_blank">进入武侯祠（完整版）</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1>南阳文化旅游地图</h1>
+        <p>南阳市位于河南省西南部，是国家历史文化名城，素有“帝乡”“南都”“玉都”之称。境内历史文化旅游资源丰富，拥有国家级重点文物保护单位多处。</p>
+    </header>
+
+    <section class="map-container" id="scenes">
+        <h2 class="map-title">主要景区景点</h2>
+        <div class="map-grid">
+            <!-- 武侯祠 -->
+            <div class="scene-card">
+                <a href="https://ae.1in.top/wolong/v4/">
+                    <div class="scene-thumb">
+                        <img src="https://ae.1in.top/images/hero_bg.jpg" alt="武侯祠景区">
+                        <div class="scene-badge">已上线</div>
+                    </div>
+                    <div class="scene-content">
+                        <h3 class="scene-title">南阳武侯祠（卧龙岗）</h3>
+                        <p class="scene-subtitle">国家AAAA级 · 全国重点文物保护单位</p>
+                        <p class="scene-desc">三国时期著名政治家、军事家诸葛亮“躬耕南阳”故址，刘备“三顾茅庐”发生地，人称“天下第一岗”。</p>
+                        <div class="scene-actions">
+                            <a class="action-btn primary" href="https://ae.1in.top/wolong/v4/">导览地图</a>
+                            <a class="action-btn" href="https://ae.1in.top/wolong/v4/#vr">VR体验</a>
+                        </div>
+                        <div class="scene-tags">
+                            <span class="tag">三国</span>
+                            <span class="tag">文化遗址</span>
+                            <span class="tag">国家等级</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 医圣祠 -->
+            <div class="scene-card">
+                <div class="scene-thumb" style="background: linear-gradient(135deg, #8bc34a, #4caf50);"></div>
+                <div class="scene-content">
+                    <h3 class="scene-title">医圣祠（张仲景纪念地）</h3>
+                    <p class="scene-subtitle">张仲景祠与墓</p>
+                    <p class="scene-desc">张仲景是东汉医学家，被誉为“医圣”，著有《伤寒杂病论》，祠内有张仲景墓、祠殿等建筑。</p>
+                    <p class="coming-soon">开发中，敬请期待</p>
+                </div>
+            </div>
+
+            <!-- 南阳府衙 -->
+            <div class="scene-card">
+                <div class="scene-thumb" style="background: linear-gradient(135deg, #ffb347, #ff8a3d);"></div>
+                <div class="scene-content">
+                    <h3 class="scene-title">南阳府衙</h3>
+                    <p class="scene-subtitle">古代官署建筑群</p>
+                    <p class="scene-desc">始建于元朝，为南阳历代府治所在地，建筑布局完整，是研究古代官署制度的重要实物遗存。</p>
+                    <p class="coming-soon">开发中，敬请期待</p>
+                </div>
+            </div>
+
+            <!-- 南阳博物馆 -->
+            <div class="scene-card">
+                <div class="scene-thumb" style="background: linear-gradient(135deg, #6a11cb, #2575fc);"></div>
+                <div class="scene-content">
+                    <h3 class="scene-title">南阳博物馆</h3>
+                    <p class="scene-subtitle">综合性地方博物馆</p>
+                    <p class="scene-desc">馆藏文物丰富，包括青铜器、玉器、瓷器、书画等，展示南阳历史文化的演变历程。</p>
+                    <p class="coming-soon">开发中，敬请期待</p>
+                </div>
+            </div>
+
+            <!-- 汉画馆 -->
+            <div class="scene-card">
+                <div class="scene-thumb" style="background: linear-gradient(135deg, #ff9966, #ff5e62);"></div>
+                <div class="scene-content">
+                    <h3 class="scene-title">南阳汉画馆</h3>
+                    <p class="scene-subtitle">汉画像石艺术专题馆</p>
+                    <p class="scene-desc">全国最大的汉画像石收藏研究中心，画像题材多样，体现了汉代社会生活和文化艺术。</p>
+                    <p class="coming-soon">开发中，敬请期待</p>
+                </div>
+            </div>
+
+            <!-- 张衡博物馆 -->
+            <div class="scene-card">
+                <div class="scene-thumb" style="background: linear-gradient(135deg, #36d1dc, #5b86e5);"></div>
+                <div class="scene-content">
+                    <h3 class="scene-title">张衡博物馆</h3>
+                    <p class="scene-subtitle">张衡纪念地与科技展示</p>
+                    <p class="scene-desc">张衡是东汉著名天文学家、数学家，发明浑天仪和地动仪，馆内展示其生平与科技成就。</p>
+                    <p class="coming-soon">开发中，敬请期待</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-box" id="about">
+        <div class="info-card">
+            <h3>南阳历史文化简介</h3>
+            <p>南阳市古称“宛”，是楚汉文化的重要发源地，历史文化底蕴深厚，素有“四圣故里”之称：谋圣姜子牙、商圣范蠡、科圣张衡、医圣张仲景。境内有全国重点文物保护单位10处，省级文物保护单位近千处，是中原地区重要的文化旅游目的地。</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div>© 2025 南阳文旅导览地图 | 数据由南阳武侯祠博物院提供</div>
+        <div style="margin-top: 8px; font-size: 0.9rem;">
+            <a href="https://ae.1in.top/wolong/v4/" target="_blank">武侯祠完整导览</a> |
+            <a href="https://ae.1in.top/wolong/v3/" target="_blank">武侯祠历史版本</a> |
+            <a href="https://github.com/Skytigerk/wuhouci" target="_blank">项目开源</a>
+        </div>
+    </footer>
+
+    <script>
+        // 导航栏上滑显示、下滑隐藏
+        (function(){
+            var navbar = document.getElementById('navbar');
+            var lastY = 0;
+            window.addEventListener('scroll', function(){
+                var curY = window.scrollY || window.pageYOffset;
+                if (curY < 60) {
+                    navbar.classList.remove('nav-hidden');
+                } else if (curY > lastY + 4) {
+                    navbar.classList.add('nav-hidden');
+                } else if (curY < lastY - 4) {
+                    navbar.classList.remove('nav-hidden');
+                }
+                lastY = curY;
+            }, { passive: true });
+        })();
+    </script>
+</body>
+</html>
